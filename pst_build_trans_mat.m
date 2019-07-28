@@ -1,4 +1,4 @@
-function [F_MAT ALPHABET N PI]=pst_build_trans_mat(DATA,ORDER)
+function [F_MAT ALPHABET N PI]=pst_build_trans_mat(DATA,ORDER,varargin)
 %pst_build_trans_mat takes the cell array of strings DATA
 %and generates a series of transition matrices up to 9th order (10 dimensional matrix). The
 %matrices are all uint16, so change the data type if any cell in your frequency table
@@ -28,6 +28,14 @@ if ORDER<1, error('Order must be at least 1!'); end
 if ORDER>9, error('Maximum order is 8, user selected %g',ORDER); end
 
 [sequence ALPHABET]=pst_sequence_gen(DATA);
+nparams=length(varargin);
+for i=1:2:nparams
+	switch lower(varargin{i})
+		case 'alphabet'
+			ALPHABET=varargin{i+1};
+    end
+end
+
 %ALPHABET=[ALPHABET ']']; % add our end delimiter
 ncat=length(ALPHABET); % add the end as an additional category
 

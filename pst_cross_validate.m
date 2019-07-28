@@ -6,18 +6,18 @@ function cv_store=pst_cross_validate(BOUT,varargin)
 %g_min=[ .0001 .001 .01 .025 .05 ];
 %p_min=[ 1e-4 1e-3 5e-3 7e-3 1e-2 .025 .05 ];
 
-r=[1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2];
+r=[1.6]; %[1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2];
 
 p_min=[ repmat(.007,[1 length(r)]) ];
 %r=[ repmat(1.6,[1 length(p_min)]) ];
 g_min=[ repmat(.01,[1 length(p_min)]) ];
 alpha=[ repmat(17.5, [1 length(p_min)]) ];
-L=[ repmat(7,[1 length(p_min)]) ];
+L=[ repmat(5,[1 length(p_min)]) ]; % used to be 7 in jeffs code
 
 params={ 'p_min','r','g_min','alpha','L' };
 
-repetitions=5;
-ncv=10; % number of folds, set to nsongs for leave-one-out
+repetitions=1;% 5;
+ncv=10; % used to be 10 % number of folds, set to nsongs for leave-one-out
 
 
 nparams=length(varargin);
@@ -37,6 +37,7 @@ for i=1:2:nparams
 			r=varargin{i+1};
 		case 'l'
 			L=varargin{i+1};
+            L = [repmat(L,[1 length(p_min)])];
 		case 'alpha'
 			alpha=varargin{i+1};
 		case 'repetitions'
@@ -80,7 +81,7 @@ for i=1:repetitions
 			trainbouts=BOUT(trainsamples{k});
 			testbouts=BOUT(testsamples{k});
 
-			[f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,7);
+			[f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,5); % used to be 7 in jeffs code
 			tree=pst_learn(f_mat,alphabet,n,'g_min',g_min(j),'p_min',p_min(j),'r',r(j),'alpha',alpha(j),'L',L(j));
 
 			pi_dist=double(pi_dist+1)./sum(pi_dist+1);
