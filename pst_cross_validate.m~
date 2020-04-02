@@ -9,7 +9,7 @@ p_min=[1e-4 1e-3 2e-3 3e-3 4e-3 5e-3 7e-3 1e-2 .025 .05]; %1e-4 1e-3 2e-3 3e-3 4
 %r=[1.6]; %[1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2];
 
 %p_min=[ repmat(.007,[1 length(r)]) ];
-% r=[ repmat(1.6,[1 length(p_min)]) ];
+r=[ repmat(1.6,[1 length(p_min)]) ];
 %r = 1.5:0.02:1.6;
 r=1.6;
 g_min=[ repmat(.01,[1 length(p_min)]) ];
@@ -51,8 +51,7 @@ for i=1:2:nparams
 end
 
 nsongs=length(BOUT);
-[~, alphabet_s]=pst_sequence_gen(DATA);
-%[f_mat alphabet_s n pi_dist]=pst_build_trans_mat(BOUT,L(1));
+[f_mat alphabet_s n pi_dist]=pst_build_trans_mat(BOUT,L(1));
 % break dataset into folds
 % form the partitions
 % what if we simply vary p_min?
@@ -78,7 +77,7 @@ for i=1:repetitions
         % training samples
         trainbouts=BOUT(trainsamples{k});
         testbouts=BOUT(testsamples{k});
-        [f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,L(1),'alphabet',alphabet_s); % used to be 7 in jeffs code
+        [f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,7,'alphabet',alphabet_s); % used to be 7 in jeffs code
         for jr = 1:length(r)
             for j=1:length(p_min)  
                 tree=pst_learn(f_mat,alphabet,n,'g_min',g_min(1),'p_min',p_min(j),'r',r(jr),'alpha',alpha(1),'L',L(1));

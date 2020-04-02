@@ -74,7 +74,7 @@ end
 L=7; % maximum order
 p_min=.0073; % minimum occurrence probability
 g_min=.01; % minimum probability at each node=1.75;
-r=1.6; % minimum difference between parent and child node
+r=1.6; %1.6; % minimum difference between parent and child node
 alpha=17.5;
 p_smoothing=0;
 
@@ -267,7 +267,11 @@ switch length(s)
 
 end
 
-f=single(f);
+try
+    f=single(f);
+catch em
+    f=single(full(f));
+end
 
 end
 
@@ -290,7 +294,7 @@ switch length(s)+1
 	case 6
 		f_vec=squeeze(f_mat{6}(s(1),s(2),s(3),s(4),s(5),:));
 	case 7
-		f_vec=squeeze(f_mat{7}(s(1),s(2),s(3),s(4),s(5),s(6),:));
+		f_vec=squeeze(full(f_mat{7}(s(1),s(2),s(3),s(4),s(5),s(6),:)));
 	case 8
 		f_vec=squeeze(f_mat{8}(s(1),s(2),s(3),s(4),s(5),s(6),s(7),:));
 	case 9
@@ -300,8 +304,11 @@ switch length(s)+1
 	otherwise
 
 end
-
-f_vec=single(f_vec);
+try 
+    f_vec=single(f_vec);
+catch em
+    f_vec = single(full(f_vec));
+end
 
 end
 
@@ -330,7 +337,11 @@ switch	length(s)+1
 
 end
 
-f_vec=single(f_vec);
+try
+    f_vec=single(f_vec);
+catch em
+    f_vec = single(full(f_vec));
+end
 
 end
 

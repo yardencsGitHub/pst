@@ -44,14 +44,14 @@ F_MAT{1}=zeros(1,ncat,'uint16');
 F_MAT{2}=zeros(ncat,ncat,'uint16');
 PI=zeros(size(F_MAT{1}));
 
-if ORDER>1, F_MAT{3}=ndSparse.spalloc([ncat,ncat,ncat], ceil(0.1*ncat^3)); end %zeros(ncat,ncat,ncat,'uint16'); end
-if ORDER>2, F_MAT{4}=ndSparse.spalloc([ncat,ncat,ncat,ncat], ceil(0.001*ncat^4)); end %zeros(ncat,ncat,ncat,ncat,'uint16'); end
-if ORDER>3, F_MAT{5}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat], ceil(1e-5*ncat^5)); end %zeros(ncat,ncat,ncat,ncat,ncat,'uint16'); end
-if ORDER>4, F_MAT{6}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat,ncat], ceil(1e-6*ncat^6)); end %zeros(ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
-if ORDER>5, F_MAT{7}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat,ncat,ncat], ceil(1e-8*ncat^7)); end %zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
-if ORDER>6, F_MAT{8}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat], ceil(1e-10*ncat^8)); end %zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
-if ORDER>7, F_MAT{9}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat], ceil(1e-12*ncat^9)); end %zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
-if ORDER>8, F_MAT{10}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat], ceil(1e-12*ncat^10)); end %zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>1, F_MAT{3}=zeros(ncat,ncat,ncat,'uint16'); end
+if ORDER>2, F_MAT{4}=zeros(ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>3, F_MAT{5}=ndSparse.spalloc([ncat,ncat,ncat,ncat,ncat], ncat^5); zeros(ncat,ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>4, F_MAT{6}=zeros(ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>5, F_MAT{7}=zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>6, F_MAT{8}=zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>7, F_MAT{9}=zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
+if ORDER>8, F_MAT{10}=zeros(ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,ncat,'uint16'); end
 
 
 % reached largest variable size, could use memmapfile
