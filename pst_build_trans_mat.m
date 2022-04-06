@@ -22,7 +22,7 @@ function [F_MAT ALPHABET N PI]=pst_build_trans_mat(DATA,ORDER,varargin)
 %	PI
 %	starting distribution
 %
-addpath('/Users/yardenc/Documents/MATLAB/Add-Ons/Collections/ndSparse_G3_2013_03_13','-end');
+%addpath('/Users/yardenc/Documents/MATLAB/Add-Ons/Collections/ndSparse_G3_2013_03_13','-end');
 
 if nargin<2, ORDER=5; end
 if ORDER<1, error('Order must be at least 1!'); end
