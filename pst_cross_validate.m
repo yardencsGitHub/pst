@@ -21,6 +21,7 @@ params={'p_min','r','g_min','alpha','L'};
 repetitions=1;% 5;
 ncv=10; % used to be 10 % number of folds, set to nsongs for leave-one-out
 
+use_full = 0; % enable using the full fmat and not the sparse fmat.
 
 nparams=length(varargin);
 
@@ -46,12 +47,14 @@ for i=1:2:nparams
 			repetitions=varargin{i+1};
 		case 'ncv'
 			ncv=varargin{i+1};
+        case 'use_full'
+			use_full=varargin{i+1};
 		otherwise
 	end
 end
 
 nsongs=length(BOUT);
-[~, alphabet_s]=pst_sequence_gen(DATA);
+[~, alphabet_s]=pst_sequence_gen(BOUT);
 %[f_mat alphabet_s n pi_dist]=pst_build_trans_mat(BOUT,L(1));
 % break dataset into folds
 % form the partitions
@@ -78,7 +81,11 @@ for i=1:repetitions
         % training samples
         trainbouts=BOUT(trainsamples{k});
         testbouts=BOUT(testsamples{k});
-        [f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,L(1),'alphabet',alphabet_s); % used to be 7 in jeffs code
+        if use_full == 0
+            [f_mat alphabet n pi_dist]=pst_build_trans_mat(trainbouts,L(1),'alphabet',alphabet_s); % used to be 7 in jeffs code
+        else
+            [f_mat alphabet n pi_dist]=pst_build_trans_mat_full(trainbouts,L(1),'alphabet',alphabet_s); % used to be 7 in jeffs code
+        end
         for jr = 1:length(r)
             for j=1:length(p_min)  
                 tree=pst_learn(f_mat,alphabet,n,'g_min',g_min(1),'p_min',p_min(j),'r',r(jr),'alpha',alpha(1),'L',L(1));
